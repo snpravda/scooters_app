@@ -1,0 +1,1 @@
+for setting up backend project go to ./backend/README.md
