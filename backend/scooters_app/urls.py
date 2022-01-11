@@ -24,5 +24,5 @@ schema_view = get_swagger_view(title="Scooters App API")
 urlpatterns = [
     url(r"^$", schema_view),
     path("admin/", admin.site.urls),
-    path("scooters/", include("scooters.urls"))
+    path("/", include("scooters.urls"))
 ]
