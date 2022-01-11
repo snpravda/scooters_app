@@ -12,7 +12,7 @@ def index(request):
 
 
 class UserApiView(GenericAPIView):
-    """Is Used for creating user by email if user does not exists"""
+    """Is Used for creating user by email if user does not exists. If user exists nothing will happen"""
     parser_classes = (parsers.FormParser, parsers.MultiPartParser,)
     renderer_classes = (renderers.JSONRenderer,)
     serializer_class = UserSerializer
