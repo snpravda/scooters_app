@@ -1,14 +1,10 @@
+from django.db.models import Q
 from django.http import HttpResponse
-from rest_framework import parsers, renderers, status, permissions
-from rest_framework.generics import GenericAPIView
+from rest_framework import parsers, renderers, status
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
-permissions.AllowAny
 from .models import *
-from .serializers import UserSerializer
-
-
-def index(request):
-    return HttpResponse("I am alive")
+from .serializers import UserSerializer, GetScootersSerializer
 
 
 class UserApiView(GenericAPIView):
@@ -32,3 +28,13 @@ class UserApiView(GenericAPIView):
 
         except Exception as e:
             return Response({"result": "ERROR " + str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetScootersView(ListAPIView):
+    """Returns all free scooters"""
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser,)
+    renderer_classes = (renderers.JSONRenderer,)
+    serializer_class = GetScootersSerializer
+
+    def get_queryset(self):
+        return Scooter.objects.filter(used_by_user=None)
