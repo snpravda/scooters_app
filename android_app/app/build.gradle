@@ -2,11 +2,13 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'com.google.gms.google-services'
 }
+
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.example.mapwithmarker"
         minSdkVersion 23
@@ -38,6 +40,8 @@ dependencies {
     implementation 'com.github.kittinunf.fuel:fuel-android:2.3.1'
     implementation 'com.github.kittinunf.fuel:fuel-json:2.3.1'
     implementation 'com.github.kittinunf.fuel:fuel-coroutines:2.3.1'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation 'com.google.android.gms:play-services-auth:20.0.1'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

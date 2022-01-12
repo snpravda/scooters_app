@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "272963677900",
+    "project_id": "scooters-startup",
+    "storage_bucket": "scooters-startup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272963677900:android:df23222a0a8facab5c5c69",
+        "android_client_info": {
+          "package_name": "com.example.mapwithmarker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272963677900-lb9jucu50n46rrko0vrk5b3n6a0vbc3m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mapwithmarker",
+            "certificate_hash": "a0bb456cbb0e0cecc7459959856498b8a497ced1"
+          }
+        },
+        {
+          "client_id": "272963677900-n441g6ql982ckt37jlqil37m9hdc2uqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMQOeuQsfQukQZoIs9fi2i18EU3u_32eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272963677900-n441g6ql982ckt37jlqil37m9hdc2uqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
