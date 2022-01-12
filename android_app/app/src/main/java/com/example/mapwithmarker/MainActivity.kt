@@ -2,10 +2,12 @@ package com.example.mapwithmarker
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mapwithmarker.R
+
+var server = "https://jsonplaceholder.typicode.com/"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var getScooterButton: Button
@@ -15,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         getScooterButton = findViewById(R.id.get_scooters_btn)
-
         getScooterButton.setOnClickListener {
             this.getScooters()
         }
