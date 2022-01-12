@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_swagger",
+    "scooters.apps.ScootersConfig",
 ]
 
 MIDDLEWARE = [
@@ -73,7 +74,9 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    # "DEFAULT_PERMISSION_CLASSES":
+    #     ("rest_framework.permissions.AllowAny",),
 }
 
 WSGI_APPLICATION = "scooters_app.wsgi.application"
