@@ -38,7 +38,7 @@ class Ride(models.Model):
     id = models.AutoField("id", primary_key=True)
     user: User = models.ForeignKey(User, on_delete=models.CASCADE)
     scooter: Scooter = models.ForeignKey(Scooter, on_delete=models.CASCADE)
-    start_ride_time = models.DateTimeField(auto_now_add=True)
+    start_ride_time = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     end_ride_time = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
