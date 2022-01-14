@@ -28,4 +28,5 @@ python manage.py createsuperuser
 ```shell
 python manage.py runserver
 ```
+Go to http://127.0.0.1:8000 for Swagger UI
 Go to http://127.0.0.1:8000/admin/ for creating providers and scooters

@@ -19,3 +19,5 @@ class GetScootersSerializer(serializers.ModelSerializer):
         fields = ("id", "latitude", "longitude", "battery_percentage", "price_per_hour", "provider_name",)
 
 
+class StartStopRideSerializer(serializers.Serializer):
+    email = serializers.EmailField()
