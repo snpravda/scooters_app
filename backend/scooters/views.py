@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework import parsers, renderers, status
 from rest_framework.generics import GenericAPIView, ListAPIView, get_object_or_404
 from rest_framework.response import Response
@@ -53,7 +55,7 @@ class ScootersStartRideView(GenericAPIView):
             if scooter.used_by_user:
                 return  Response(
                     {"success": False, "error": f"Ride already started at {scooter.last_ride.start_ride_time}"},
-                    status=status.HTTP_200_OK)
+                    status=status.HTTP_400_BAD_REQUEST)
 
             user: User = get_object_or_404(User, email=serializer.data["email"])
 
@@ -65,8 +67,44 @@ class ScootersStartRideView(GenericAPIView):
             scooter.save()
 
             return Response(
-                {"success": True, "result": f"new ride started at {new_ride.start_ride_time}"},
+                {"success": True, "result": "new ride started", "start_ride_time": new_ride.start_ride_time},
                 status=status.HTTP_200_OK
             )
+        except Exception as e:
+            return Response({"success": False, "error": "ERROR " + str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ScootersStopRideView(GenericAPIView):
+    """Starts ride on scooter, if scooter is already on ride nothing will happen"""
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser,)
+    renderer_classes = (renderers.JSONRenderer,)
+    serializer_class = StartStopRideSerializer
+
+    def post(self, request, scooter_id):
+        try:
+            scooter: Scooter = get_object_or_404(Scooter, pk=scooter_id)
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            if not scooter.used_by_user:
+                return Response(
+                    {"success": False, "error": f"Scooter is not on ride"},
+                    status=status.HTTP_400_BAD_REQUEST)
+
+            user: User = get_object_or_404(User, email=serializer.data["email"])
+
+            ride = scooter.last_ride
+            ride.end_ride_time = datetime.now()
+            ride_time = ride.end_ride_time - ride.start_ride_time.replace(tzinfo=None)
+            cost = round((ride_time.total_seconds() / 3600) * scooter.provider.price_per_hour, 2)
+
+            scooter.used_by_user = None
+            scooter.save()
+            ride.save()
+
+            return Response(
+                {"success": True, "result": "ride finished successfully", "cost": cost},
+                status=status.HTTP_200_OK
+            )
+
         except Exception as e:
             return Response({"success": False, "error": "ERROR " + str(e)}, status=status.HTTP_400_BAD_REQUEST)
